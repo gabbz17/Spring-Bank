@@ -1,9 +1,11 @@
 package com.example.Bank.controller;
 
+import com.example.Bank.dto.PasswordDTO;
 import com.example.Bank.dto.UserDTO;
 import com.example.Bank.entity.User;
 import com.example.Bank.entity.mapper.UserMapper;
 import com.example.Bank.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,9 +39,9 @@ public class UserController {
         return ResponseEntity.ok().body(use);
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<User> updatePassword(@PathVariable Long id, @RequestBody User user){
-        User user1 = service.updatePassword(id, user);
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updatePassword(@PathVariable Long id, @Valid @RequestBody PasswordDTO pass){
+        User user1 = service.updatePassword(id, pass);
         return ResponseEntity.ok().body(user1);
     }
 
