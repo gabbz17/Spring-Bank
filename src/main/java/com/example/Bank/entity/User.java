@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.NumberFormat;
+
+import java.math.BigDecimal;
 
 @AllArgsConstructor  @NoArgsConstructor  @Getter  @Setter
 @Entity
@@ -21,5 +24,6 @@ public class User {
     @Column(name = "password", nullable = false, length = 10)
     private String password;
     @Column(name = "amount")
-    private Double amount;
+    @NumberFormat(pattern = "#,###.00")
+    private BigDecimal amount;
 }

@@ -22,11 +22,11 @@ public class TransferService {
         User user1 = trans.findByEmail(mod.getRemetente());
         User user2 = trans.findByEmail(mod.getDestinatario());
 
-        if (user1.getAmount() < mod.getValorTransfer()){
-            throw new RuntimeException("Limite excedido");
+        if (user1.getAmount().compareTo(mod.getValorTransfer()) > 0){
+            user1.setAmount(user1.getAmount().subtract(mod.getValorTransfer()));
+            user2.setAmount(user2.getAmount().add(mod.getValorTransfer()));
         } else {
-            user1.setAmount(user1.getAmount() - mod.getValorTransfer());
-            user2.setAmount(user2.getAmount() + mod.getValorTransfer());
+            throw new RuntimeException("Limite excedido");
         }
         return repo.save(mod);
     }

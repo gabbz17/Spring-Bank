@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.NumberFormat;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter  @Setter  @AllArgsConstructor  @NoArgsConstructor
@@ -20,8 +22,9 @@ public class Transfer{
     private String remetente;
     @Column(name = "destinatario", nullable = false)
     private String destinatario;
+    @NumberFormat(pattern = "#,###.00")
     @Column(name = "valorTransfer", nullable = false)
-    private Double valorTransfer;
+    private BigDecimal valorTransfer;
     @Column(name = "dataHora")
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime hrDtTransacao = LocalDateTime.now();
